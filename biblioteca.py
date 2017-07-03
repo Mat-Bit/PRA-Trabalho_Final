@@ -1,5 +1,6 @@
 from IncluiCommand import IncluiCommand
 from EditaCommand import  EditaCommand
+from RemoverCommand import RemoverCommand
 from Autor import Autor
 from Leitor import Leitor
 from Livro import Livro
@@ -110,3 +111,45 @@ if __name__ == '__main__':
 
                 novo_autor_livro = IncluiCommand(sub_op, autor_livro)
                 novo_autor_livro.execute(sub_op)
+
+        if opc == 3:
+            print("1- Autor")
+            print("2- Leitor")
+            print("3- Livro")
+            print("4- Autor do Livro\n")
+
+            sub_op = input("Qual Entidade deseja remover: ")
+
+
+            if sub_op == 1:
+                cod = raw_input("De o codigo do autor que deseja remover: ")
+
+                autor = Autor(cod)
+
+                remove_autor = RemoverCommand(sub_op, autor)
+                remove_autor.execute(sub_op)
+
+            if sub_op == 2:
+                cod = raw_input("De um codigo para ele: ")
+
+                leitor = Leitor(cod)
+
+                remove_leitor = RemoverCommand(sub_op, leitor)
+                remove_leitor.execute(sub_op)
+
+            if sub_op == 3:
+                cod = raw_input("De um codigo do livro: ")
+
+                livro = Livro(cod)
+
+                remove_livro = RemoverCommand(sub_op, livro)
+                remove_livro.execute(sub_op)
+
+            if sub_op == 4:
+                codL = raw_input("Digite o codigo do livro: ")
+                codA = raw_input("Agora digite o codigo do autor: ")
+
+                autor_livro = AutoresLivros(codL, codA)
+
+                remove_autor_livro = RemoverCommand(sub_op, autor_livro)
+                remove_autor_livro.execute(sub_op)
