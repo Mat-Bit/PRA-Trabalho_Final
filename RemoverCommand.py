@@ -3,44 +3,40 @@ from MenuCommand import *
 
 class RemoverCommand(MenuCommand):
 
-    def __init__(self, op, objeto):
+    def __init__(self, op, cod):
         if op == 1:
-            self._cod = objeto.getCod()
+            self._cod = cod
 
         if op == 2:
-            self._cod = objeto.getCod()
+            self._cod = cod
 
         if op == 3:
-            self._cod = objeto.getCod()
+            self._cod = cod
 
         if op == 4:
-            self._codL = objeto.getCodL()
-            self._codA = objeto.getCodA()
+            self._codL = cod
+
 
     def execute(self, op):
         if op == 1:
             autor_db = bsddb.btopen('autor.db', 'c')
 
-            print(self._cod)
-
             if self._cod not in autor_db:
                 print ("Codigo nao existente, por favor, tente novamente.\n")
                 return
 
-            autor_db.delete(self._cod)
+            autor_db.pop(self._cod)
 
             autor_db.close()
 
         if op == 2:
             leitor_db = bsddb.btopen('leitor.db', 'c')
 
-            print(self._cod)
-
             if self._cod not in leitor_db:
                 print ("Codigo nao existente, por favor, tente novamente.\n")
                 return
 
-            autor_db.delete(self._cod)
+            leitor_db.pop(self._cod)
 
             leitor_db.close()
 
@@ -53,27 +49,22 @@ class RemoverCommand(MenuCommand):
                 print ("Codigo nao existente, por favor, tente novamente.\n")
                 return
 
-            livros_db.delete(self._cod)
+            livros_db.pop(self._cod)
 
 
             livros_db.close()
 
         if op == 4:
-            livros_db = bsddb.btopen('livros.db', 'r')
-            autor_db = bsddb.btopen('autor.db', 'r')
             autor_livro_db = bsddb.btopen('autor_livro.db', 'c')
 
 
-            if (self._codL in livros_db) and (self._codA in autor_db):
+            if (self._codL in autor_livro_db):
 
-                autor_livro_db.delete(self._codA)
+                autor_livro_db.pop(self._codL)
 
             else:
-                print ("Codigo do livro ou autor invalido.\n")
+                print ("Codigo do livro invalido.\n")
                 return
 
-            print ("O livro %s foi escrito pelo autor(a): %s\n" %(livros_db[self._codL],autor_db[self._codA]))
-
             autor_livro_db.close()
-            livros_db.close()
-            autor_db.close()
+
