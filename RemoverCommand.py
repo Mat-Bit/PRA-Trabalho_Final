@@ -27,7 +27,7 @@ class RemoverCommand(MenuCommand):
                 print ("Codigo nao existente, por favor, tente novamente.\n")
                 return
 
-            autor_db->del(self._cod)
+            autor_db.delete(self._cod)
 
             autor_db.close()
 
@@ -40,7 +40,7 @@ class RemoverCommand(MenuCommand):
                 print ("Codigo nao existente, por favor, tente novamente.\n")
                 return
 
-            autor_db->del(self._cod)
+            autor_db.delete(self._cod)
 
             leitor_db.close()
 
@@ -53,7 +53,7 @@ class RemoverCommand(MenuCommand):
                 print ("Codigo nao existente, por favor, tente novamente.\n")
                 return
 
-            livros_db->del(self._cod)
+            livros_db.delete(self._cod)
 
 
             livros_db.close()
@@ -66,7 +66,7 @@ class RemoverCommand(MenuCommand):
 
             if (self._codL in livros_db) and (self._codA in autor_db):
 
-                autor_livro_db->del(self._codA)
+                autor_livro_db.delete(self._codA)
 
             else:
                 print ("Codigo do livro ou autor invalido.\n")
